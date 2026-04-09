@@ -1,0 +1,363 @@
+@import "tailwindcss";
+
+/* 梦核风格色彩系统 - Corecore Aesthetic */
+:root {
+  /* 主色调 - 柔和紫色系 */
+  --color-primary: #b8a9c9;
+  --color-primary-light: #d4c8e0;
+  --color-primary-dark: #8e7aa3;
+  
+  /* 背景色系 */
+  --color-bg-base: #1a1625;
+  --color-bg-elevated: #241e30;
+  --color-bg-glass: rgba(36, 30, 48, 0.7);
+  
+  /* 强调色 */
+  --color-accent: #e8b4d0;
+  --color-accent-soft: #f0d4e5;
+  
+  /* 文字色 */
+  --color-text-primary: #f5f0fa;
+  --color-text-secondary: #c4b8d4;
+  --color-text-muted: #8a7fa3;
+  
+  /* 边框与分割线 */
+  --color-border: rgba(184, 169, 201, 0.2);
+  --color-divider: rgba(184, 169, 201, 0.1);
+  
+  /* 状态色 */
+  --color-success: #a8d8b9;
+  --color-warning: #f0d4a8;
+  --color-error: #e8b4b4;
+  
+  /* 发光效果 */
+  --glow-primary: rgba(184, 169, 201, 0.4);
+  --glow-accent: rgba(232, 180, 208, 0.3);
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-bg-base: var(--color-bg-base);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-bg-glass: var(--color-bg-glass);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-divider: var(--color-divider);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --glow-primary: var(--glow-primary);
+  --glow-accent: var(--glow-accent);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-bg-base) 0%, #12101a 100%);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+/* 毛玻璃效果 */
+.glass {
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+}
+
+/* 柔和发光边框 */
+.glow-border {
+  box-shadow: 0 0 20px var(--glow-primary), inset 0 0 20px rgba(184, 169, 201, 0.05);
+}
+
+/* 文字发光效果 */
+.text-glow {
+  text-shadow: 0 0 10px var(--glow-accent);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ==================== 梦核风格动画效果 ==================== */
+
+/* 背景容器 */
+.dream-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* 漂浮光斑 */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-light) 100%);
+  top: 50%;
+  right: -50px;
+  animation-delay: -5s;
+  animation-duration: 25s;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  bottom: -100px;
+  left: 30%;
+  animation-delay: -10s;
+  animation-duration: 22s;
+}
+
+.orb-4 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, var(--color-accent-soft) 0%, var(--color-accent) 100%);
+  top: 30%;
+  left: 20%;
+  animation-delay: -15s;
+  animation-duration: 28s;
+  opacity: 0.3;
+}
+
+/* 漂浮动画 */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(50px, 50px) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 100px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-50px, 50px) rotate(270deg);
+  }
+}
+
+/* 渐变流动效果 */
+.gradient-flow {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-bg-base),
+    var(--color-primary-dark),
+    var(--color-bg-elevated),
+    var(--color-accent),
+    var(--color-bg-base)
+  );
+  animation: gradient-rotate 30s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 星星闪烁效果 */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* 脉冲发光效果 */
+.pulse-glow {
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow-primary);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--glow-accent), 0 0 60px var(--glow-primary);
+  }
+}
+
+/* 渐入效果 */
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 延迟渐入 */
+.fade-in-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.fade-in-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* 呼吸效果 */
+.breathe {
+  animation: breathe 4s infinite ease-in-out;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* 文字渐变动画 */
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-text-primary),
+    var(--color-accent),
+    var(--color-primary),
+    var(--color-text-primary)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* 悬停上浮效果 */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-primary);
+}
+
+/* 输入框聚焦动画 */
+input:focus, textarea:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(184, 169, 201, 0.2);
+}
+
+/* 禁用选择时的样式 */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 玻璃态悬停 */
+.glass-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-hover:hover {
+  background: rgba(46, 38, 60, 0.85);
+  backdrop-filter: blur(25px);
+  border-color: var(--color-primary);
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 加载动画 */
+.loading-dots::after {
+  content: "";
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ""; }
+  40% { content: "."; }
+  60% { content: ".."; }
+  80%, 100% { content: "..."; }
+}

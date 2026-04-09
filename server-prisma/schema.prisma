@@ -1,0 +1,75 @@
+// Prisma Schema for OC Chat Platform
+// 数据库架构定义
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // 开发环境使用 SQLite，生产环境可切换为 PostgreSQL
+  url      = env("DATABASE_URL")
+}
+
+// 用户模型
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  name        String?
+  avatar      String?
+  characters  Character[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// 角色模型
+model Character {
+  id           String         @id @default(uuid())
+  name         String
+  emoji        String         @default("✨")
+  avatar       String?        // 头像图片 URL
+  personality  String?        // 性格特点
+  background   String?        // 背景故事
+  greeting     String?        // 开场白
+  isPublic     Boolean        @default(false)  // 是否公开
+  
+  userId       String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  conversations Conversation[]
+  
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  
+  @@index([userId])
+  @@index([isPublic])
+}
+
+// 对话会话模型
+model Conversation {
+  id           String       @id @default(uuid())
+  title        String       @default("新对话")
+  
+  characterId  String
+  character    Character    @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  
+  messages     Message[]
+  
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  
+  @@index([characterId])
+}
+
+// 消息模型
+model Message {
+  id             String       @id @default(uuid())
+  role           String       // 'user' | 'assistant' | 'system'
+  content        String
+  
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  
+  createdAt      DateTime     @default(now())
+  
+  @@index([conversationId])
+}
